@@ -8,21 +8,36 @@
 </head>
 <body>
     <form>
-        <input type="radio" id= "est" name="est" value="est">
-        <label for="est">Eastern Standard Time</label>
-        <input type="radio" id= "cst" name="cst" value="cst">
-        <label for="cst">Central Standard Time</label>
-        <input type="radio" id= "mst" name="mst" value="mst">
-        <label for="mst">Mountain Standard Time</label>
-        <input type="radio" id= "pst" name="pst" value="pst">
-        <label for="pst">Pacific Standard Time</label>
-        <input type="radio" id= "ast" name="ast" value="ast">
-        <label for="ast">Alaska Standard Time</label>
-        <input type="radio" id= "hst" name="hst" value="hst">
-        <label for="hst">Hawaii-Aleutian Standard Time</label>
+        <input type="radio" id= "est" name="tz" value="est">
+        <label for="est">Eastern Standard Time</label><br>
+        <input type="radio" id= "cst" name="tz" value="cst">
+        <label for="cst">Central Standard Time</label><br>
+        <input type="radio" id= "mst" name="tz" value="mst">
+        <label for="mst">Mountain Standard Time</label><br>
+        <input type="radio" id= "pst" name="tz" value="pst">
+        <label for="pst">Pacific Standard Time</label><br>
+        <input type="radio" id= "ast" name="tz" value="ast">
+        <label for="ast">Alaska Standard Time</label><br>
+        <input type="radio" id= "hst" name="tz" value="hst">
+        <label for="hst">Hawaii-Aleutian Standard Time</label><br>
         <button type="button" value="Submit" onclick="ValidateForm()">Submit</button>
     </form>
     <br>
-    <div id="print"></div>
+    <div id="result"></div>
+    <script type="text/javascript">
+        function ValidateForm()
+        {
+            var radioButtons = document.getElementsByName("tz");
+            var radioValue = radioButtons[0].value;
+            for(var i = 0; i < radioButtons.length; i++)
+            {
+                if(radioButtons[i].checked == true)
+                {
+                    radioValue = radioButtons[i].value;
+                }
+            }
+            document.getElementById("result").innerHTML = radioValue;
+        }
+    </script>
 </body>
 </html>
