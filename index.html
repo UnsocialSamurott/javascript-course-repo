@@ -10,20 +10,28 @@
     <form>
         <input type="radio" id= "est" name="tz" value="est">
         <label for="est">Eastern Standard Time</label><br>
+
         <input type="radio" id= "cst" name="tz" value="cst">
         <label for="cst">Central Standard Time</label><br>
+
         <input type="radio" id= "mst" name="tz" value="mst">
         <label for="mst">Mountain Standard Time</label><br>
+
         <input type="radio" id= "pst" name="tz" value="pst">
         <label for="pst">Pacific Standard Time</label><br>
+
         <input type="radio" id= "ast" name="tz" value="ast">
         <label for="ast">Alaska Standard Time</label><br>
+
         <input type="radio" id= "hst" name="tz" value="hst">
         <label for="hst">Hawaii-Aleutian Standard Time</label><br>
+
         <button type="button" value="Submit" onclick="ValidateForm()">Submit</button>
     </form>
     <br>
     <div id="result"></div>
+    <br>
+    <div id="clock"></div>
     <script type="text/javascript">
         function ValidateForm()
         {
@@ -38,6 +46,18 @@
             }
             document.getElementById("result").innerHTML = radioValue;
         }
+        function PrintTime()
+        {
+            var date = new Date();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var time = hour + ":" + minute + ": " + second;
+            document.getElementById("clock").innerHTML = time;
+            setTimeout(PrintTime(), 1000);
+        }
+        
+        PrintTime();
     </script>
 </body>
 </html>
