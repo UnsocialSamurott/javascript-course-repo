@@ -33,30 +33,43 @@
     <br>
     <div id="clock"></div>
     <script type="text/javascript">
+        var offset = 0;
         function ValidateForm()
         {
             var radioButtons = document.getElementsByName("tz");
-            var radioValue = radioButtons[0].value;
+            var timezone = radioButtons[0].value;
             for(var i = 0; i < radioButtons.length; i++)
             {
                 if(radioButtons[i].checked == true)
                 {
-                    radioValue = radioButtons[i].value;
+                    timezone = radioButtons[i].value;
                 }
             }
-            document.getElementById("result").innerHTML = radioValue;
+            switch(timezone)
+            {
+                case "cst":
+                    offset = 2;
+                    break;
+                case "est":
+                    offset = 3;
+                    break;
+                default:
+                    offset = 0;
+                    break;
+            }
+            document.getElementById("result").innerHTML = timezone;
         }
         function PrintTime()
         {
             var date = new Date();
-            var hour = date.getHours();
+            var hour = date.getHours() + offset;
             var minute = date.getMinutes();
             var second = date.getSeconds();
             var time = hour + ":" + minute + ": " + second;
             document.getElementById("clock").innerHTML = time;
             setTimeout(PrintTime(), 1000);
         }
-        
+
         PrintTime();
     </script>
 </body>
