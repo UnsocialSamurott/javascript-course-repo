@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hello World!</title>
 </head>
-<body>
+<body onload="PrintTime()">
     <form>
         <input type="radio" id= "est" name="tz" value="est">
         <label for="est">Eastern Standard Time</label><br>
@@ -53,8 +53,8 @@
             var minute = date.getMinutes();
             var second = date.getSeconds();
             var time = hour + ":" + minute + ": " + second;
-            setTimeout(PrintTime(),1000);
-            document.getElementById("clock").innerHTML = time;
+            var t = setTimeout(PrintTime(),1000);
+            document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + second;
         }
         PrintTime();
     </script>
