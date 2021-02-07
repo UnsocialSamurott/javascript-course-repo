@@ -32,11 +32,13 @@
     <br>
     <div id="result"></div>
     <br>
-    <div id="clock"></div>
+    <div id="clock" class="clock"></div>
     <script type="text/javascript">
         var offset = 0;
+        console.log(offset);
         function ValidateForm()
         {
+            console.log(offset);
             var radioButtons = document.getElementsByName("tz");
             var timezone = radioButtons[0].value;
             for(var i = 0; i < radioButtons.length; i++)
@@ -46,31 +48,48 @@
                     timezone = radioButtons[i].value;
                 }
             }
-            switch(timezone)
+            if(timezone == "cst")
             {
-                case "cst":
-                    offset = 2;
-                    break;
-                case "est":
-                    offset = 3;
-                    break;
-                default:
-                    offset = 0;
-                    break;
+                offset = 2;
             }
+            else if(timezone == "est")
+            {
+                offset = 3;
+            }
+            else
+            {
+                offset = 0;
+            }
+            console.log(offset);
             document.getElementById("result").innerHTML = timezone;
+            PrintTime();
         }
         function PrintTime()
         {
+            console.log(offset);
+            var session = "am";
             var date = new Date();
-            var hour = date.getHours() + offset;
+            var hour = date.getHours();
+            var hourPrinted = hour + offset;
+            if(hour < 12)
+            {
+                session = "am";
+            }
+            else
+            {
+                session = "pm";
+                hourPrinted = hourPrinted % 12;
+                if(hourPrinted == 0)
+                {
+                    hourPrinted = 12;
+                }
+            }
             var minute = date.getMinutes();
             var second = date.getSeconds();
-            var time = hour + ":" + minute + ":" + second;
+            var time = hourPrinted + ":" + minute + ":" + second + session;
             document.getElementById("clock").innerHTML = time;
-            setTimeout(PrintTime(), 1000);
+            repeater = setTimeout(PrintTime(), 1000);
         }
-
         PrintTime();
     </script>
 </body>
